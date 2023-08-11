@@ -7,22 +7,26 @@ function Login() {
   const [inputUser, setInputUser] = useState(""),
     [login, setLogin] = useState(false),
     [inputPass, setInputPass] = useState("");
+
   useEffect(() => {
-    axios
-      .post("https://dummyjson.com/auth/login", {
-        username: inputUser,
-        password: inputPass,
-      })
-      .then(function (response) {
-        localStorage.setItem("token", response.data.token);
-        console.log(response.data.token);
-        localStorage.setItem("data-token", JSON.stringify(response.data));
-        Navigate("/profile");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [login === true]);
+    if (login === true) {
+      axios
+        .post("https://dummyjson.com/auth/login", {
+          username: inputUser,
+          password: inputPass,
+        })
+        .then(function (response) {
+          localStorage.setItem("token", response.data.token);
+          //console.log(response);
+          localStorage.setItem("data-token", JSON.stringify(response.data));
+          Navigate("/profile");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [login]);
+
   return (
     <div>
       <div>
