@@ -12,7 +12,7 @@ const Product = () => {
     axios.get(`https://dummyjson.com/products/${productId}`)
       .then(response => {
         const products = response.data;
-        console.log(products);
+        //console.log(products);
         setProductData(products);
       })
       .catch(error => {
