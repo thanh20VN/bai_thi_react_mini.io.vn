@@ -1,7 +1,7 @@
 //import { useEffect } from "react";
 import axios from "axios";
 
-export function apiLogin(login, inputUser, inputPass, Navigate) {
+function apiLogin(login, inputUser, inputPass, Navigate) {
     if (login === true) {
         axios
             .post("https://dummyjson.com/auth/login", {
@@ -27,3 +27,25 @@ export function apiLogin(login, inputUser, inputPass, Navigate) {
             });
     }
 }
+
+
+function apiProduct(setProductData, productId) {
+    axios.get(`https://dummyjson.com/products/${productId}`)
+        .then(response => {
+            const products = response.data;
+            //console.log(products);
+            setProductData(products);
+        })
+        .catch(error => {
+            console.log(error);
+            // Xử lý lỗi lấy thông tin sản phẩm
+        });
+}
+
+const fetchProducts = async (setProducts) => {
+    const response = await axios.get("https://dummyjson.com/products");
+    const products = response.data.products;
+    setProducts(products);
+};
+
+export { fetchProducts, apiLogin, apiProduct }

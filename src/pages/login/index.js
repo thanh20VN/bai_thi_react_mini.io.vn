@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiLogin } from "./api";
+import { apiLogin } from "../../api";
 
 function Login() {
   const Navigate = useNavigate();
