@@ -7,7 +7,6 @@ function Login() {
   const [inputUser, setInputUser] = useState(""),
     [login, setLogin] = useState(false),
     [inputPass, setInputPass] = useState("");
-
   useEffect(() => {
     if (login === true) {
       axios
@@ -16,17 +15,24 @@ function Login() {
           password: inputPass,
         })
         .then(function (response) {
+          //if (response.status == 400) {
+          //  alert("sai rồi kìa")
+          // } else {
+            // localStorage.setItem("token", response.data.token);
+            // localStorage.setItem("data-token", JSON.stringify(response.data));
+            // Navigate("/profile");
+          // }
+          //console.log(response.status)
           localStorage.setItem("token", response.data.token);
-          //console.log(response);
-          localStorage.setItem("data-token", JSON.stringify(response.data));
-          Navigate("/profile");
+            localStorage.setItem("data-token", JSON.stringify(response.data));
+            Navigate("/profile");
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function () {
+          alert("sai thông tin rồi bạn");
+          //console.log(error);
         });
     }
   }, [login]);
-
   return (
     <div>
       <div>
