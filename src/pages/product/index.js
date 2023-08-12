@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { apiProduct } from './api';
 
 const Product = () => {
   const { productId } = useParams();
@@ -8,22 +8,8 @@ const Product = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-
-    axios.get(`https://dummyjson.com/products/${productId}`)
-      .then(response => {
-        const products = response.data;
-        //console.log(products);
-        setProductData(products);
-      })
-      .catch(error => {
-        console.log(error);
-        // Xử lý lỗi lấy thông tin sản phẩm
-      });
+    apiProduct(setProductData, productId)
   }, [productId]);
-
-  // productData.forEach(product => {
-  //   // ...
-  // });
 
   return (
     <div>

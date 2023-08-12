@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { fetchProducts } from "./api";
 
 function ConFirm() {
   const navigate = useNavigate();
@@ -8,28 +8,19 @@ function ConFirm() {
   const [userName, setUserName] = useState(""),
     [email, setEmail] = useState(""),
     [avatar, setAvatar] = useState("");
-  const fetchProducts = async () => {
-    const response = await axios.get("https://dummyjson.com/products");
-    const products = response.data.products;
-    setProducts(products);
-  };
+
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(setProducts);
   }, []);
   const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`, { replace: true });
+    navigate(`/product/${productId}`);
   };
   useLayoutEffect(() => {
     const Information = JSON.parse(localStorage.getItem("data-token"));
-
     setEmail(Information.email);
     setAvatar(Information.image);
     setUserName(Information.username);
-
-
-
-
   }, []);
   return (
     <>

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiLogin } from "./api";
 
 function Login() {
   const Navigate = useNavigate();
@@ -8,31 +8,9 @@ function Login() {
     [login, setLogin] = useState(false),
     [inputPass, setInputPass] = useState("");
   useEffect(() => {
-    if (login === true) {
-      axios
-        .post("https://dummyjson.com/auth/login", {
-          username: inputUser,
-          password: inputPass,
-        })
-        .then(function (response) {
-          //if (response.status == 400) {
-          //  alert("sai rồi kìa")
-          // } else {
-            // localStorage.setItem("token", response.data.token);
-            // localStorage.setItem("data-token", JSON.stringify(response.data));
-            // Navigate("/profile");
-          // }
-          //console.log(response.status)
-          localStorage.setItem("token", response.data.token);
-            localStorage.setItem("data-token", JSON.stringify(response.data));
-            Navigate("/profile");
-        })
-        .catch(function () {
-          alert("sai thông tin rồi bạn");
-          //console.log(error);
-        });
-    }
-  }, [login]);
+    apiLogin(login, inputUser, inputPass, Navigate)
+  }, [login])
+
   return (
     <div>
       <div>
